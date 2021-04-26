@@ -9,6 +9,7 @@ const Color kActiveSliderColor = Color(0xFFE3E1E1);
 const Color kInactiveSliderColor = Color(0xFF777777);
 const Color kSliderThumbColor = Color(0xFFEB1555);
 const Color kSliderOverlayColor = Color(0x29EB1555);
+const Color kRoundedIconButtonColor = Color(0xFF777777);
 
 const String kComfortaaFontFam = 'Comfortaa';
 const double kCalculateBmiButtonHeight = 80.0;

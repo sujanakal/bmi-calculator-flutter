@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'reusable_card.dart';
 import 'icon_content.dart';
 import 'constants.dart';
+import 'rounded_icon_button.dart';
 
 enum Gender {
   male,
@@ -17,6 +18,8 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Gender selectedGender;
   int height = 180;
+  int weight = 60;
+  int age = 18;
 
   @override
   Widget build(BuildContext context) {
@@ -81,12 +84,12 @@ class _InputPageState extends State<InputPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       // crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Text(
-                          'HEIGHT',
-                          style: kLabelTextStyle,
-                        ),
-                        SizedBox(
-                          height: 2.0,
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'HEIGHT',
+                            style: kLabelTextStyle,
+                          ),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -139,12 +142,111 @@ class _InputPageState extends State<InputPage> {
           ),
           Expanded(
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Expanded(
-                  child: ReusableCard(cardColor: kActiveCardColor),
+                  child: ReusableCard(
+                    cardColor: kActiveCardColor,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'WEIGHT',
+                            style: kLabelTextStyle,
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.alphabetic,
+                          children: [
+                            Text(
+                              weight.toString(),
+                              style: kNumberTextStyle,
+                            ),
+                            Text(
+                              'kg',
+                              style: kLabelTextStyle,
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundedIconButton(
+                                icon: FontAwesomeIcons.minus,
+                                onIconPressed: () {
+                                  setState(() {
+                                    weight--;
+                                  });
+                                }),
+                            SizedBox(
+                              width: 15.0,
+                            ),
+                            RoundedIconButton(
+                              icon: FontAwesomeIcons.plus,
+                              onIconPressed: () {
+                                setState(() {
+                                  weight++;
+                                });
+                              },
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
                 Expanded(
-                  child: ReusableCard(cardColor: kActiveCardColor),
+                  child: ReusableCard(
+                    cardColor: kActiveCardColor,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'AGE',
+                            style: kLabelTextStyle,
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              age.toString(),
+                              style: kNumberTextStyle,
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundedIconButton(
+                                icon: FontAwesomeIcons.minus,
+                                onIconPressed: () {
+                                  setState(() {
+                                    age--;
+                                  });
+                                }),
+                            SizedBox(
+                              width: 15.0,
+                            ),
+                            RoundedIconButton(
+                              icon: FontAwesomeIcons.plus,
+                              onIconPressed: () {
+                                setState(() {
+                                  age++;
+                                });
+                              },
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
