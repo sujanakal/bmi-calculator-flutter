@@ -1,9 +1,12 @@
+import 'package:bmi_calculator/screens/result_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'reusable_card.dart';
-import 'icon_content.dart';
-import 'constants.dart';
-import 'rounded_icon_button.dart';
+import 'package:bmi_calculator/components//reusable_card.dart';
+import 'package:bmi_calculator/components/icon_content.dart';
+import 'package:bmi_calculator/constants.dart';
+import '../components/rounded_icon_button.dart';
+import '../components/bottomButton.dart';
+import 'package:bmi_calculator/bmiCalculatorBrain.dart';
 
 enum Gender {
   male,
@@ -27,11 +30,7 @@ class _InputPageState extends State<InputPage> {
       appBar: AppBar(
         title: Text(
           'BMI CALCULATOR',
-          style: TextStyle(
-            fontFamily: 'Comfortaa',
-            fontWeight: FontWeight.bold,
-            letterSpacing: 2.0,
-          ),
+          style: kAppBarTextStyle,
         ),
       ),
       body: Column(
@@ -251,16 +250,28 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            margin: EdgeInsets.only(top: 10.0),
-            height: kCalculateBmiButtonHeight,
-            width: double.infinity,
-            color: kCalculateBmiButtonColor,
+          BottomButton(
+            title: 'CALCULATE BMI',
+            onButtonTap: () {
+              BmiCalculatorBrain bCalc =
+                  new BmiCalculatorBrain(height: height, weight: weight);
+              //Navigator.pushNamed(context, '/bmiResult');
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return ResultsPage(
+                      bmiNumber: bCalc.calculateBmi(),
+                      resultStatus: bCalc.getResultStatus(),
+                      interpretation: bCalc.getInterpretation(),
+                    );
+                  },
+                ),
+              );
+            },
           ),
         ],
       ),
     );
   }
 }
-
-//Color(0xFF1D1F33)
